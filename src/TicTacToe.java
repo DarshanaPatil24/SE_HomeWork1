@@ -5,8 +5,8 @@ public class TicTacToe {
 		
 		view gameView = new view();
 		model gameModel = new model(gameView);
-		controller gameController = new controller(gameModel, gameView);
+		controller gameController = new controller(gameModel);
 		
-		gameView.setVisible(true);
+		
 	}
 }

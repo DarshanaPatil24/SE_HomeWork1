@@ -14,6 +14,7 @@ public class view extends JFrame{
     public JButton reset = new JButton("Reset");
     public JTextArea playerturn= new JTextArea();
     private char[][] gameBoard;
+	public char[][] setGameBoard;
     
 	
 	view() {
@@ -48,12 +49,7 @@ public class view extends JFrame{
         gui.add(gamePanel, BorderLayout.NORTH);
 	}			
 	
-	void displayGUIBoard() {		
-		for(int r = 0; r < 3; r++)
-			for(int c = 0; c < 3; c++){
-				blocks[r][c].setText("" + gameBoard[r][c]);
-			}
-	}
+	
 
 	public JButton[][] getGameBoardButtons() { return blocks; }
 	public JButton getResetButton() { return reset; }
