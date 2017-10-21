@@ -15,17 +15,19 @@ public class model {
 
 	
 	public char[][] getBoard() { return board; }
-	
-	public model(view view){
-	this.gameView = view;	
-	}	
-	
 	public char getPlayerTurn1() { return playerTurn1; }
 	public view getGameView() { return gameView;}
 	public JButton[][] getGameBoardButtons() { return gameView.getGameBoardButtons(); }
 	public JButton getResetButton() { return gameView.getResetButton(); }
 	public void setGameBoard(char[][] gameBoard) { this.gameBoard = gameBoard;}
-	public JTextArea getPlayerTurn(){ return gameView.playerturn;}
+	public JTextArea getPlayerTurn(){ return gameView.playerturn;}	
+	void displayGUIBoard(char[][] gameBoard) {		
+		gameView.displayGUIBoard(gameBoard);
+	}
+	
+	public model(view view){
+	this.gameView = view;	
+	}
 	
 	
 	
@@ -47,14 +49,7 @@ public class model {
 	
 	
 	
-	public void reset() {		
-		playerTurn1 = 'X';		
-		for(int r = 0; r < row; r++)
-			for(int c = 0; c < col; c++)
-				board[r][c] = ' ';		
-		numMoves = 0;
-	}
-	
+
 	
 	public char isWinner() {		
 		for(int r = 0; r < row; r++)
@@ -90,4 +85,10 @@ public class model {
 		
 		return 'N';
 	}
+
+	public void passText() {
+		gameView.setMessages(getPlayerTurn1());
+		
+	}
+	
 	}

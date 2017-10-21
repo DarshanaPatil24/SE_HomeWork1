@@ -7,47 +7,47 @@ import javax.swing.JTextArea;
 public class controller {
 
 	private model gameModel;
+	private int numMoves = 0;
+	private char text;
+	public char gameBoard[][];
+	
 	
 	public controller(model gameModel) {
 	
 		this.gameModel = gameModel;
-		gameModel.reset();
+		gameBoard = gameModel.getBoard();
+		reset();			
 		ButtonListener bl = new ButtonListener();
 		bl.addButtonListener(new ButtonListener());
+		
 	}
 
 	private class ButtonListener implements ActionListener{
 		JButton[][] gameBoardButtons = gameModel.getGameBoardButtons();
 		JButton resetButton = gameModel.getResetButton();
-		char gameBoard[][] = gameModel.getBoard();
-		
-		
-		public void actionPerformed(ActionEvent e) {			
+		public char gameBoard[][] = gameModel.getBoard();
+		private char text = gameModel.getPlayerTurn1();
+		public void actionPerformed(ActionEvent e) {	
 			
-			JTextArea messages = gameModel.getPlayerTurn();
-			
+			JTextArea messages = gameModel.getPlayerTurn();			
 			for(int r = 0; r < 3; r++)
 				for(int c = 0; c < 3; c++)
-					if(e.getSource() == gameBoardButtons[r][c]){						
+					if(e.getSource() == gameBoardButtons[r][c]){			
 						
 						gameModel.updatePlayerTurn(r, c, gameModel.getPlayerTurn1());						
 						gameModel.setGameBoard(gameBoard);
-						displayGUIBoard();					
+						gameModel.displayGUIBoard(gameBoard);					
 						
 						if(gameModel.isWinner() == 'W'){
-							char text = gameModel.getPlayerTurn1();
-							int playerNo=1;
-							if (text=='O')
-								playerNo=2;
-							messages.setText("Player " + playerNo + " wins!");	
+							gameModel.passText();
 						}
 						if(gameModel.isWinner() == 'T')
 							messages.setText("Game ends in a draw");						
 						
 					}
 					else if(e.getSource() == resetButton) {
-						gameModel.reset();
-						displayGUIBoard();
+						reset();
+						gameModel.displayGUIBoard(gameBoard);
 					}
 		}
 		
@@ -57,13 +57,14 @@ public class controller {
 					gameBoardButtons[r][c].addActionListener(listener);
 			resetButton.addActionListener(listener);				
 		}
-		
-		void displayGUIBoard() {		
-			for(int r = 0; r < 3; r++)
-				for(int c = 0; c < 3; c++){
-					gameBoardButtons[r][c].setText("" + gameBoard[r][c]);
-				}
-		}
 	}
+	
+		public void reset() {		
+			text = 'X';		
+			for(int r = 0; r < 3; r++)
+				for(int c = 0; c < 3; c++)
+					gameBoard[r][c] = ' ';		
+			numMoves = 0;
+		}
 
 }

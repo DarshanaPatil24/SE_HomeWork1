@@ -15,6 +15,8 @@ public class view extends JFrame{
     public JTextArea playerturn= new JTextArea();
     private char[][] gameBoard;
 	public char[][] setGameBoard;
+	private char playerTurn1 = 'X';
+	
     
 	
 	view() {
@@ -32,11 +34,13 @@ public class view extends JFrame{
         options.add(reset);
         JPanel messages = new JPanel(new FlowLayout());
         messages.setBackground(Color.white);
+        
 
         gui.add(options, BorderLayout.CENTER);
         gui.add(messages, BorderLayout.SOUTH);
 
         messages.add(playerturn); 
+        playerturn.setText("Player 1 to play 'X'");
         		
 		for(int r = 0; r < 3; r++)
 			for(int c = 0; c < 3; c++){
@@ -47,10 +51,24 @@ public class view extends JFrame{
 			}		
 					
         gui.add(gamePanel, BorderLayout.NORTH);
-	}			
+	}		
+	
+	public void displayGUIBoard( char[][] gameBoard) {		
+		for(int r = 0; r < 3; r++)
+			for(int c = 0; c < 3; c++){
+				getGameBoardButtons()[r][c].setText("" + gameBoard[r][c]);
+			}
+	}
+	
+	public void setMessages(char text){
+		int playerNo=1;
+		if (text=='O'){
+			playerNo=2;}
+		playerturn.setText("Player " + playerNo + " wins!");
+	}
 	
 	
-
+	public char getPlayerTurn1() { return playerTurn1; }
 	public JButton[][] getGameBoardButtons() { return blocks; }
 	public JButton getResetButton() { return reset; }
 	public void setGameBoard(char[][] gameBoard) { this.gameBoard = gameBoard;}
