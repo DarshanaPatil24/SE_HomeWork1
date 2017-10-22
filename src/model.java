@@ -1,7 +1,7 @@
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
-public class model implements modelInterface {	
+public final class model implements modelInterface {	
 
 	private int row = 3;
 	private int col = 3;
@@ -46,8 +46,6 @@ public class model implements modelInterface {
 			}			
 			numMoves++;
 			
-		}else{
-			gameView.setMessages(' ', 'T');
 		}
 	}
 	

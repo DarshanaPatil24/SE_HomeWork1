@@ -2,7 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
-public class controller implements controllerInterface {
+public final class controller implements controllerInterface {
 
 	private model gameModel;
 	private char text;
@@ -109,5 +109,6 @@ public class controller implements controllerInterface {
 			for(int c = 0; c < 3; c++)
 				gameBoard[r][c] = ' ';		
 		gameModel.setNumMoves(0);
+		gameModel.passMessages(' ', ' ');
 	}
 }

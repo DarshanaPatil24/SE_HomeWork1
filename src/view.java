@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.*;
 
 
-public class view extends JFrame implements viewInterface {
+public final class view extends JFrame implements viewInterface {
 	
 	private JFrame gui = new JFrame("Tic Tac Toe");
 	private JButton[][] blocks = new JButton[3][3];
@@ -61,11 +61,13 @@ public class view extends JFrame implements viewInterface {
 	
 	/* set messages to show player's turn,who won the game and if the game is tied*/
 	public void setMessages(char text, char c) {
+		if(text==' ' && c==' ')
+			playerturn.setText("");
 		if(c=='T' && text==' '){
 			playerturn.setText("Game ends in a draw");
 		}
 		int playerNo=1;
-		if (text=='X'){
+		if (text=='O'){
 			playerNo=2;
 			}
 		if (c == 'W'){		
