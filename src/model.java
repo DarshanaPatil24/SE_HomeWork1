@@ -12,7 +12,6 @@ public class model implements modelInterface {
 	private char[][] gameBoard;
 	private JTextArea playerturn;
 	private JButton[][] blocks;
-	private controller c;
 
 
 	public char[][] getBoard() { return board; }
@@ -25,14 +24,13 @@ public class model implements modelInterface {
 	public JTextArea getPlayerTurn(){ return gameView.playerturn;}	
 	public int getNumMoves(){ return numMoves;}	
 	public void setNumMoves(int numMoves){ this.numMoves=numMoves;}
-	public void displayGUIBoard(char[][] gameBoard) {	
-		gameView.displayGUIBoard(gameBoard);
-	}
+	public void displayGUIBoard(char[][] gameBoard) {gameView.displayGUIBoard(gameBoard);}
 
 	public model(view view){
 		this.gameView = view;	
 	}
 
+	/* method to switch between players*/
 	public void updatePlayerTurn(int xPos, int yPos, char player) {		
 		if(board[xPos][yPos] == ' ' && numMoves < 10) {			
 			board[xPos][yPos] = player;		
@@ -53,14 +51,15 @@ public class model implements modelInterface {
 		}
 	}
 	
-	public void update(int row, int column, char[][] gameBoard2, char c) {
-		updatePlayerTurn(row, column, c);
-		setGameBoard(gameBoard2);
-		gameView.displayGUIBoard(gameBoard2);
+	/* update model and display the gui board*/
+	public void update(int row, int column, char[][] Board, char playerInput) {
+		updatePlayerTurn(row, column, playerInput);
+		setGameBoard(Board);
+		gameView.displayGUIBoard(Board);
 	}
 	
-	public void passMessages(char playerTurn12, char d) {
-		gameView.setMessages(playerTurn12,d);
+	public void passMessages(char playerInput, char winCheck) {
+		gameView.setMessages(playerInput,winCheck);
 
 	}
 

@@ -4,7 +4,7 @@ import javax.swing.JTextArea;
 
 public interface viewInterface {
 	public void displayGUIBoard( char[][] gameBoard2);	
-	public void setMessages(char text, char c);
+	public void setMessages(char text, char c) throws NullPointerException;
 	public char getPlayerTurn1() ;
 	public JButton[][] getGameBoardButtons(); 
 	public JButton getResetButton() ;
