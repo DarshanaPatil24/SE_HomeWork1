@@ -77,7 +77,7 @@ public final class view extends JFrame implements viewInterface {
 		} 
 		 
 		if (c=='S'){
-			playerturn.setText("Player " + playerNo + " to play" + text);
+			playerturn.setText("Player " + playerNo + " to play" + " " + text);
 		}
 	}
 	
