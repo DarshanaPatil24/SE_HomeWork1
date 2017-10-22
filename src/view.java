@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-
 import javax.swing.*;
 
 
@@ -16,8 +15,6 @@ public class view extends JFrame{
     private char[][] gameBoard;
 	public char[][] setGameBoard;
 	private char playerTurn1 = 'X';
-	
-    
 	
 	view() {
 		
@@ -80,4 +77,5 @@ public class view extends JFrame{
 	public JButton getResetButton() { return reset; }
 	public void setGameBoard(char[][] gameBoard) { this.gameBoard = gameBoard;}
 	public JTextArea getPlayerTurn(){ return playerturn;}
+	public String getMessages() { return playerturn.getText();}
 	}
