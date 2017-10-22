@@ -2,12 +2,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
-public class controller {
+public class controller implements controllerInterface {
 
 	private model gameModel;
-	private int numMoves = 0;
-	public char text;
-	public char gameBoard[][];
+	
+	private char text;
+	private char gameBoard[][];
 
 	public controller(model gameModel) {
 		this.gameModel = gameModel;
@@ -28,19 +28,24 @@ public class controller {
 				for(int c = 0; c < 3; c++)
 					if(e.getSource() == gameBoardButtons[r][c]){
 						gameModel.update(r,c,gameBoard,gameModel.getPlayerTurn1());
-						if(isWinner() == 'W'){
+						System.out.println("isWinner" + isWinner());
+						char winCheck = isWinner();
+						if(winCheck == 'W'){
 							gameModel.passMessages(gameModel.getPlayerTurn1(),'W');
-							reset();
-						} else if(isWinner() == 'T'){
-							gameModel.passMessages(gameModel.getPlayerTurn1(),'T');
-							reset();
+							disableAll(gameBoardButtons);
+						} else if(winCheck == 'T' ){
+							System.out.println("tied");
+							gameModel.passMessages(' ','T');
 						}
 					}
 			if(e.getSource() == resetButton) {
 				reset();
+				enableAll(gameBoardButtons);
 				gameModel.displayGUIBoard(gameBoard);
 			}
 		}
+
+	
 
 		public void addButtonListener(ActionListener listener) {
 			for(int r = 0; r < 3; r++)
@@ -49,9 +54,10 @@ public class controller {
 			resetButton.addActionListener(listener);				
 		}
 	}
-
+	
+	
 	public char isWinner() {
-
+		int numMoves =gameModel.getNumMoves();
 		for(int r = 0; r < 3; r++)
 			if(gameBoard[r][0] == gameBoard[r][1] && gameBoard[r][0] == gameBoard[r][2] && gameBoard[r][0] != ' '){
 				if(gameModel.getPlayerTurn1() == 'X') { gameModel.setPlayerTurn('O'); } else { gameModel.setPlayerTurn('X'); }
@@ -78,20 +84,33 @@ public class controller {
 			return 'W';
 		}		
 
-		if(numMoves >= 9){
+		if(gameModel.getNumMoves() >= 9){
 			numMoves++;
+			System.out.println("here");
 			return 'T';
 		}
 
 		return 'N';
 	}
 
+	public void enableAll(JButton[][] blocks) {
+		for(int r = 0; r < 3; r++)
+			for(int c = 0; c < 3; c++)
+				blocks[r][c].setEnabled(true);		
+	}
+	
+	public void disableAll(JButton[][] blocks) {
+		for(int r = 0; r < 3; r++)
+			for(int c = 0; c < 3; c++)
+				blocks[r][c].setEnabled(false);
+		}
+
 	public void reset() {		
 		gameModel.setPlayerTurn('X');		
 		for(int r = 0; r < 3; r++)
 			for(int c = 0; c < 3; c++)
 				gameBoard[r][c] = ' ';		
-		numMoves = 0;
+		gameModel.setNumMoves(0);
 	}
 
 }

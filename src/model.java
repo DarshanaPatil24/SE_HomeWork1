@@ -1,17 +1,17 @@
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
-public class model {	
+public class model implements modelInterface {	
 
 	private int row = 3;
 	private int col = 3;
 	private char board[][] = new char[row][col];
-	public char playerTurn1 = 'X';
+	private char playerTurn1 = 'X';
 	private int numMoves = 0;
 	private view gameView;
 	private char[][] gameBoard;
-	public JTextArea playerturn;
-	public JButton[][] blocks;
+	private JTextArea playerturn;
+	private JButton[][] blocks;
 	private controller c;
 
 
@@ -23,7 +23,9 @@ public class model {
 	public void setGameBoard(char[][] gameBoard) { this.gameBoard = gameBoard;}
 	public void setPlayerTurn(char playerTurn1) { this.playerTurn1 = playerTurn1;}
 	public JTextArea getPlayerTurn(){ return gameView.playerturn;}	
-	void displayGUIBoard(char[][] gameBoard) {	
+	public int getNumMoves(){ return numMoves;}	
+	public void setNumMoves(int numMoves){ this.numMoves=numMoves;}
+	public void displayGUIBoard(char[][] gameBoard) {	
 		gameView.displayGUIBoard(gameBoard);
 	}
 
@@ -45,11 +47,15 @@ public class model {
 				gameView.setMessages('X', 'S');
 			}			
 			numMoves++;
+			
+		}else{
+			gameView.setMessages(' ', 'T');
 		}
 	}
 	
 	public void update(int row, int column, char[][] gameBoard2, char c) {
 		updatePlayerTurn(row, column, c);
+		setGameBoard(gameBoard2);
 		gameView.displayGUIBoard(gameBoard2);
 	}
 	

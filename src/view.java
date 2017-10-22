@@ -6,14 +6,14 @@ import java.awt.GridLayout;
 import javax.swing.*;
 
 
-public class view extends JFrame{
+public class view extends JFrame implements viewInterface{
 	
-	public JFrame gui = new JFrame("Tic Tac Toe");
-    public JButton[][] blocks = new JButton[3][3];
-    public JButton reset = new JButton("Reset");
-    public JTextArea playerturn= new JTextArea();
-    private char[][] gameBoard;
-	public char[][] setGameBoard;
+	private JFrame gui = new JFrame("Tic Tac Toe");
+	private JButton[][] blocks = new JButton[3][3];
+	private JButton reset = new JButton("Reset");
+	JTextArea playerturn= new JTextArea();
+	private char[][] gameBoard;
+	private char[][] setGameBoard;
 	private char playerTurn1 = 'X';
 	
 	view() {
@@ -58,15 +58,18 @@ public class view extends JFrame{
 	}
 	
 	public void setMessages(char text, char c){
+		if(c=='T' && text==' '){
+			playerturn.setText("Game ends in a draw");
+		}
 		int playerNo=1;
 		if (text=='O'){
 			playerNo=2;
 			}
 		if (c == 'W'){		
 		playerturn.setText("Player " + playerNo + " wins!");
-		} else if(c=='T'){
-			playerturn.setText("Game ends in a draw");
-		} else if (c=='S'){
+		} 
+		 
+		if (c=='S'){
 			playerturn.setText("Player " + playerNo + " to play" + text);
 		}
 	}
