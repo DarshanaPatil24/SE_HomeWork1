@@ -53,18 +53,25 @@ public class view extends JFrame{
         gui.add(gamePanel, BorderLayout.NORTH);
 	}		
 	
-	public void displayGUIBoard( char[][] gameBoard) {		
+	public void displayGUIBoard( char[][] gameBoard2) {		
 		for(int r = 0; r < 3; r++)
 			for(int c = 0; c < 3; c++){
-				getGameBoardButtons()[r][c].setText("" + gameBoard[r][c]);
+				getGameBoardButtons()[r][c].setText("" + gameBoard2[r][c]);
 			}
 	}
 	
-	public void setMessages(char text){
+	public void setMessages(char text, char c){
 		int playerNo=1;
 		if (text=='O'){
-			playerNo=2;}
+			playerNo=2;
+			}
+		if (c == 'W'){		
 		playerturn.setText("Player " + playerNo + " wins!");
+		} else if(c=='T'){
+			playerturn.setText("Game ends in a draw");
+		} else if (c=='S'){
+			playerturn.setText("Player " + playerNo + " to play" + text);
+		}
 	}
 	
 	
