@@ -1,3 +1,8 @@
+package test;
+
+import source.controller;
+import source.model;
+import source.view;
 import junit.framework.TestCase;
 
 public class controllerTest extends TestCase {

@@ -1,3 +1,5 @@
+package source;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,7 +19,7 @@ public final class view extends JFrame implements viewInterface {
 	private char playerTurn1 = 'X';
 	
 	/* view constructor which set ups the gui*/
-	view() {
+	public view() {
 		
 		gui.setVisible(true);
 		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

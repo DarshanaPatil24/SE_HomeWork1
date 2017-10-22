@@ -1,3 +1,6 @@
+package test;
+
+import source.view;
 import junit.framework.TestCase;
 
 public class viewTest extends TestCase {
