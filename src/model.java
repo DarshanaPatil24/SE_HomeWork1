@@ -12,7 +12,8 @@ public class model {
 	private char[][] gameBoard;
 	public JTextArea playerturn;
 	public JButton[][] blocks;
-
+    private controller c;
+    
 	
 	public char[][] getBoard() { return board; }
 	public char getPlayerTurn1() { return playerTurn1; }
@@ -47,40 +48,7 @@ public class model {
 		}
 	}
 	
-	public char isWinner() {		
-		for(int r = 0; r < row; r++)
-			if(board[r][0] == board[r][1] && board[r][0] == board[r][2] && board[r][0] != ' '){
-				if(playerTurn1 == 'X') { playerTurn1 = 'O'; } else { playerTurn1 = 'X'; }
-				numMoves = 10;
-				return 'W';
-			}		
-		
-		for(int c = 0; c < col; c++)
-			if(board[0][c] == board[1][c] && board[0][c] == board[2][c] && board[0][c] != ' '){
-				if(playerTurn1 == 'X') { playerTurn1 = 'O'; } else { playerTurn1 = 'X'; }
-				numMoves = 10;
-				return 'W';
-			}		
-		
-		if(board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] != ' '){
-			if(playerTurn1 == 'X') { playerTurn1 = 'O'; } else { playerTurn1 = 'X'; }
-			numMoves = 10;
-			return 'W';
-		}		
-		
-		if(board[2][0] == board[1][1] && board[2][0] == board[0][2] && board[2][0] != ' '){
-			if(playerTurn1 == 'X') { playerTurn1 = 'O'; } else { playerTurn1 = 'X'; }
-			numMoves = 10;
-			return 'W';
-		}		
-		
-		if(numMoves >= 9){
-			numMoves++;
-			return 'T';
-		}
-		
-		return 'N';
-	}
+
 
 	
 	public void update(int row, int column, char[][] gameBoard2, char c) {
@@ -88,11 +56,12 @@ public class model {
 		setGameBoard(gameBoard2);
 		displayGUIBoard(gameBoard2);					
 		
-		if(isWinner() == 'W'){
-			gameView.setMessages(getPlayerTurn1(),'W');
-		} else if(isWinner() == 'T')
-			gameView.setMessages(getPlayerTurn1(),'T');
 		
+		
+		
+	}
+	public void passMessages(char playerTurn12, char d) {
+		gameView.setMessages(playerTurn12,d);
 		
 	}
 	
